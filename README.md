@@ -2,8 +2,10 @@
 Payments API
 
 # Install
-`$ pip install fastapi`
-`$ pip install "uvicorn[standard]"`
+```
+$ pip install fastapi
+$ pip install "uvicorn[standard]"
+```
 
 # How to run
 
