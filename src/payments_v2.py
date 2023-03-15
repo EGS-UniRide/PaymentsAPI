@@ -11,7 +11,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-YOUR_DOMAIN = 'http://localhost:8000'
+YOUR_DOMAIN = 'http://localhost:8000/'
 
 @router.post('/create-checkout-session/{priceid}')
 def create_checkout_session(priceid: str):
