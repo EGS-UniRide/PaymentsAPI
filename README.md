@@ -1,10 +1,15 @@
 # PaymentsAPI
 Payments API
 
+# Create Virtual Environment
+```
+$ python3 -m venv env
+$ source env/bin/activate
+```
+
 # Install
 ```
-$ pip install fastapi
-$ pip install "uvicorn[standard]"
+$ pip install -r requirements.txt
 ```
 
 # How to run
