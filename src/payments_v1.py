@@ -18,7 +18,7 @@ bills = {   b1.billid : b1,
             b3.billid : b3}
 
 router = APIRouter(
-    prefix="/v1",
+    prefix="/payments",
     tags=["payments"],
     responses={404: {"description": "Not found"}},
 )
