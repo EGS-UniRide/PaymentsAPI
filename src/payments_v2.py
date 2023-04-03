@@ -15,7 +15,7 @@ router = APIRouter(
 )
 
 YOUR_DOMAIN = 'http://localhost:8000/'
-# eu é que tenho q fazer o tracking com uma BD
+
 @router.post('/create-checkout-session/{priceid}')
 def create_checkout_session(priceid: str):
     try:
@@ -39,6 +39,10 @@ def create_checkout_session(priceid: str):
 @router.get("/bills", response_model=list[schemas.BillBase])
 async def all_bills(skip: int = 0, limit: int = 100, db: Session = Depends(deps.get_db)):
     return crud.get_bills(db=db, skip=skip, limit=limit)
+
+@router.get("/bills/{userid}", response_model=list[schemas.BillBase])
+async def all_bills(userid: str, skip: int = 0, limit: int = 100, db: Session = Depends(deps.get_db)):
+    return crud.get_bill_by_payer_id(db=db, payer_id=userid, skip=skip, limit=limit)
 
 @router.get("/bill/{billid}", response_model=schemas.BillBase)
 async def get_bill(billid: str, db: Session = Depends(deps.get_db)):

@@ -5,8 +5,8 @@ from . import models, schemas
 def get_bill_by_bill_id(db: Session, bill_id: str):
     return db.query(models.Bill).filter(models.Bill.billid == bill_id).first()
 
-def get_bill_by_payer_id(db: Session, payer_id: str):
-    return db.query(models.Bill).filter(models.Bill.payerid == payer_id).first()
+def get_bill_by_payer_id(db: Session, payer_id: str, skip: int = 0, limit: int = 100):
+    return db.query(models.Bill).filter(models.Bill.payerid == payer_id).offset(skip).limit(limit).all()
 
 def get_bills(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Bill).offset(skip).limit(limit).all()
