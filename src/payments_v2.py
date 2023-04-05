@@ -34,6 +34,8 @@ def create_checkout_session(priceid: str):
     except Exception as e:
         return str(e)
 
+    print(checkout_session.url)
+
     return RedirectResponse(checkout_session.url, status_code=303)
 
 @router.get("/bills", response_model=list[schemas.BillBase])
@@ -53,10 +55,7 @@ async def get_bill(billid: str, db: Session = Depends(deps.get_db)):
         raise HTTPException(status_code=404, detail="Bill not found")
 
 @router.post("/bill")
-async def post_bill(bill: schemas.BillCreate, db: Session = Depends(deps.get_db)):
-    db_bill = crud.get_bill_by_bill_id(db, bill_id=bill.billid)
-    if db_bill:
-        raise HTTPException(status_code=400, detail="Bill already registered")
+async def post_bill(bill: schemas.BillBase, db: Session = Depends(deps.get_db)):
     return crud.create_bill(db=db, bill=bill)
 
 @router.delete("/bill/{billid}")

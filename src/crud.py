@@ -19,7 +19,7 @@ def delete_bill(db: Session, bill_id: str):
 
 
 def create_bill(db: Session, bill: schemas.BillCreate):
-    db_bill = models.Bill(billid=bill.billid, payerid= bill.payerid, receiverid=bill.receiverid, paydate=bill.paydate)
+    db_bill = models.Bill(payerid= bill.payerid, receiverid=bill.receiverid, paydate=bill.paydate)
     db.add(db_bill)
     db.commit()
     db.refresh(db_bill)
