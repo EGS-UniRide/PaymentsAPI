@@ -1,6 +1,14 @@
 # PaymentsAPI
 Payments API
 
+# Deploy Docker container
+
+```
+$ sudo docker build -t paymentsapi .
+```
+
+Access in 172.17.0.2:8000 .
+
 # Create Virtual Environment
 ```
 $ python3 -m venv env
