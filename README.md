@@ -2,7 +2,6 @@
 Payments API
 
 # Deploy Docker container
-
 ```
 $ sudo docker build -t paymentsapi .
 ```
