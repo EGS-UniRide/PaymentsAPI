@@ -1,4 +1,7 @@
-# Diving into docker
+# Payments API Docker File
+# Rodrigo Martins
+# sudo docker build -t paymentsapi .
+
 
 FROM python:3.10-alpine
 
@@ -9,6 +12,8 @@ LABEL version="1.0"
 RUN mkdir /app
 
 WORKDIR /app
+
+RUN mkdir bd
 
 COPY requirements.txt requirements.txt
 

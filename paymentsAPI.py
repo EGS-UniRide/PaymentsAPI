@@ -7,6 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 models.Base.metadata.create_all(bind=engine)
 
 def create_app():
+    #f = open("payments.db", "x")
+
     app = FastAPI()
 
     origins = [

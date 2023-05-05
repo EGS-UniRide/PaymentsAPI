@@ -1,0 +1,1 @@
+f = open("payments.db", "x")
