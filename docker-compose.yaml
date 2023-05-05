@@ -6,4 +6,4 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - /home/rlm/UA/EGS/PaymentsAPI/db-database:/app/db
+      - ./db-database:/app/db
