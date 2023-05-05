@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-api
+  namespace: egs-uniride
+spec:
+  selector:
+    matchLabels:
+      app: payments-api
+  template:
+    metadata:
+      labels:
+        app: payments-api
+    spec:
+      containers:
+        - name: payments-api
+          image: registry.deti:5000/paymentsapi/payments-api:0000
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: payments-db-storage
+              mountPath: /app/db
+      volumes:
+        - name: payments-db-storage
+          persistentVolumeClaim:
+            claimName: payments-db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paymentsapi-svc
+  namespace: egs-uniride
+spec:
+  ports:
+    - protocol: TCP
+      port: 8000
+      #nodePort: 32080
+      name: payapi-svc-port
+  selector:
+    app: payments-api
+  #type: NodePort
+  type: ClusterIP
