@@ -1,12 +1,15 @@
-from sqlalchemy import Column, String, Integer
+import uuid
+from typing import Optional
+from pydantic import BaseModel, Field
 
-from .database import Base
+class Bill(BaseModel):
+    id: str = Field(default_factory=uuid.uuid4, alias="_id")
+    payerid: str
+    receiverid: str
+    paydate: str
 
-
-class Bill(Base):
-    __tablename__ = "bills"
-
-    billid = Column(Integer, primary_key=True, index=True, autoincrement=True, default=None)
-    payerid = Column(String, nullable=False)
-    receiverid = Column(String, nullable=False)
-    paydate = Column(String, nullable=False)
+class BillUpdate(BaseModel):
+    id: str = Field(alias="_id")
+    payerid: Optional[str]
+    receiverid: Optional[str]
+    paydate: Optional[str]

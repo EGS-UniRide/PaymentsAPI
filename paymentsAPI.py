@@ -3,11 +3,14 @@ from src import payments_v1, payments_v2, crud, models, schemas
 from sqlalchemy.orm import Session
 from src.database import SessionLocal, engine
 from fastapi.middleware.cors import CORSMiddleware
+from pymongo import MongoClient
+from dotenv import dotenv_values
 
-models.Base.metadata.create_all(bind=engine)
+#models.Base.metadata.create_all(bind=engine)
+
+config = dotenv_values(".env")
 
 def create_app():
-    #f = open("payments.db", "x")
 
     app = FastAPI()
 
@@ -29,6 +32,16 @@ def create_app():
     return app
 
 app = create_app()
+
+@app.on_event("startup")
+def startup_db_client():
+    app.mongodb_client = MongoClient(config["DB_URI"])
+    app.database = app.mongodb_client[config["DB_NAME"]]
+    print("Connected to the MongoDB database!")
+
+@app.on_event("shutdown")
+def shutdown_db_client():
+    app.mongodb_client.close()
 
 
 @app.get("/")
