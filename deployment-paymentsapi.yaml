@@ -14,9 +14,17 @@ spec:
     spec:
       containers:
         - name: payments-api
-          image: registry.deti:5000/paymentsapi/payments-api:0002
+          image: registry.deti:5000/paymentsapi/payments-api:0003
           ports:
             - containerPort: 8000
+          volumeMounts:
+          - name: paymentsapi-secret
+            mountPath: "/tmp/secrets"
+            readOnly: true
+      volumes:
+      - name: paymentsapi-secret
+        secret:
+          secretName: paymentsapi-secret
 ---
 apiVersion: v1
 kind: Service

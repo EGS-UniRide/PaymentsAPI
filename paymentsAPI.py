@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+config = dotenv_values("/tmp/secrets/.env")
 
 def create_app():
 
@@ -31,7 +31,7 @@ app = create_app()
 
 @app.on_event("startup")
 def startup_db_client():
-    app.mongodb_client = MongoClient(config["DB_URI"])
+    app.mongodb_client = MongoClient(config["DB_URI"], username=config["DB_USER"], password=config["DB_PASS"])
     app.database = app.mongodb_client[config["DB_NAME"]]
     #print("Connected to the MongoDB database!")
 
