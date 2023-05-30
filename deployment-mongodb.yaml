@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paymentsapi-mongodb
+  namespace: egs-uniride
+spec:
+  selector:
+    matchLabels:
+      app: paymentsapi-mongodb
+  template:
+    metadata:
+      labels:
+        app: paymentsapi-mongodb
+    spec:
+      containers:
+        - name: paymentsapi-mongodb
+          image: mongo
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: paymentsapi-mongodb-data
+              mountPath: /var/lib/mongodb
+      volumes:
+        - name: paymentsapi-mongodb-data
+          persistentVolumeClaim:
+            claimName: paymentsapi-mongodb-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paymentsapi-mongodb-service
+  namespace: egs-uniride
+spec:
+  selector:
+    app: paymentsapi-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+  type: ClusterIP

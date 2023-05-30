@@ -13,8 +13,6 @@ RUN mkdir /app
 
 WORKDIR /app
 
-RUN mkdir bd
-
 COPY requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt
@@ -22,6 +20,7 @@ RUN pip install -r requirements.txt
 COPY ./src /app/src
 
 COPY paymentsAPI.py /app/paymentsAPI.py
+COPY .env /app/.env
 
 EXPOSE 8000/tcp
 

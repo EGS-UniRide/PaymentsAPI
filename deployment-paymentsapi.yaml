@@ -14,16 +14,9 @@ spec:
     spec:
       containers:
         - name: payments-api
-          image: registry.deti:5000/paymentsapi/payments-api:0000
+          image: registry.deti:5000/paymentsapi/payments-api:0002
           ports:
             - containerPort: 8000
-          volumeMounts:
-            - name: payments-db-storage
-              mountPath: /app/db
-      volumes:
-        - name: payments-db-storage
-          persistentVolumeClaim:
-            claimName: payments-db-pvc
 ---
 apiVersion: v1
 kind: Service
